@@ -5,11 +5,10 @@ class Window:
         self.__root = Tk()
         self.__root.title("Maze solver")
 
-        self.canvas = Canvas(self.__root, height=height, width=width)
-        self.canvas.pack()
+        self.__canvas = Canvas(self.__root, bg="white" height=height, width=width)
+        self.__canvas.pack(fill=BOTH, expand=1)
 
-        self.running = False
-
+        self.__running = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
     
     def redraw(self):
@@ -17,9 +16,10 @@ class Window:
         self.__root.update()
 
     def wait_for_close(self):
-        self.running = True
-        while self.running is True:
+        self.__running = True
+        while self.__running is True:
             self.redraw()
+        print("window closed...")
 
     def close(self):
-        self.running = False
+        self.__running = False
