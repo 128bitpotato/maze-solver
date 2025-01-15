@@ -4,20 +4,21 @@ from cell import Cell
 def main():
     win = Window(800, 600)
 
-    cell1 = Cell(win, x1=10, y1=10)
-    cell2 = Cell(win, True, False, True, False, x1=40, y1=10)
-    cell3 = Cell(win, False, True, False, True, x1=70, y1=10)
-    cell4 = Cell(win, True, False, False, False, x1=100, y1=10)
-    cell5 = Cell(win, False, True, False, False, x1=130, y1=10)
-    cell6 = Cell(win, False, False, True, False, x1=160, y1=10)
-    cell7 = Cell(win, False, False, False, True, x1=190, y1=10)
-    cell1.draw()
-    cell2.draw()
-    cell3.draw()
-    cell4.draw()
-    cell5.draw()
-    cell6.draw()
-    cell7.draw()
+    c = Cell(win)
+    c.has_left_wall = False
+    c.draw(50, 50, 100, 100)
+
+    c = Cell(win)
+    c.has_right_wall = False
+    c.draw(125, 125, 200, 200)
+
+    c = Cell(win)
+    c.has_bottom_wall = False
+    c.draw(225, 225, 250, 250)
+
+    c = Cell(win)
+    c.has_top_wall = False
+    c.draw(300, 300, 500, 500)
 
     win.wait_for_close()
 
