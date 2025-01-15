@@ -23,6 +23,8 @@ class Maze:
 
         self._cells = []
 
+        self._create_cells()
+
     def _create_cells(self):
         # Fill list with rows and rows with cells
         for column in range(self._num_cols):
