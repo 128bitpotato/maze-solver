@@ -33,8 +33,8 @@ class Maze:
                 self._cells[column].append(Cell(self._win))
         
         # Draw cell on each cell
-        for i in range(0, self._cells):
-            for j in range(0, self._cells[i]):
+        for i in range(self._num_cols):
+            for j in range(self._num_rows):
                 self._draw_cell(i, j)
 
 
@@ -51,5 +51,5 @@ class Maze:
 
     def _animate(self):
         self._win.redraw()
-        sleep(0.05)
+        sleep(0.02)
         
