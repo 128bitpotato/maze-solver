@@ -11,6 +11,9 @@ class Cell:
         self._y1 = None
         self._y2 = None
         self._win = win
+    
+    def __repr__(self):
+        return f"T_Wall: {self.has_top_wall} - B_Wall: {self.has_bottom_wall}"
 
     def draw(self, x1, y1, x2, y2):
         if self._win is None:
@@ -36,14 +39,14 @@ class Cell:
         if self.has_right_wall:
             line = Line(Point(x2, y1), Point(x2, y2))
             self._win.draw_line(line)
-        elif self.has_left_wall is False:
+        elif self.has_right_wall is False:
             line = Line(Point(x2, y1), Point(x2, y2))
             self._win.draw_line(line, fill_color="white")
 
         if self.has_bottom_wall:
             line = Line(Point(x1, y2), Point(x2, y2))
             self._win.draw_line(line)
-        elif self.has_left_wall is False:
+        elif self.has_bottom_wall is False:
             line = Line(Point(x1, y2), Point(x2, y2))
             self._win.draw_line(line, fill_color="white")
 
