@@ -151,6 +151,14 @@ class Maze:
             return True
         
         to_visit = []
+        # Down        
+        if j < self._num_rows - 1 and not self._cells[i][j].has_bottom_wall:
+            if not self._cells[i][j + 1].visited:
+                to_visit.append((i, j + 1))
+        # Right        
+        if i < self._num_cols - 1 and not self._cells[i][j].has_right_wall:
+            if not self._cells[i + 1][j].visited:
+                to_visit.append((i + 1, j))
         # Left
         if i > 0 and not self._cells[i][j].has_left_wall:
             if not self._cells[i - 1][j].visited:
@@ -159,15 +167,8 @@ class Maze:
         if j > 0 and not self._cells[i][j].has_top_wall:
             if not self._cells[i][j - 1].visited:
                 to_visit.append((i, j - 1))
-        # Right        
-        if i < self._num_cols - 1 and not self._cells[i][j].has_right_wall:
-            if not self._cells[i + 1][j].visited:
-                to_visit.append((i + 1, j))
-        # Down        
-        if j < self._num_rows - 1 and not self._cells[i][j].has_bottom_wall:
-            if not self._cells[i][j + 1].visited:
-                to_visit.append((i, j + 1))
-        
+
+
         while len(to_visit) != 0:
             next = to_visit.pop(0)
             self._cells[i][j].draw_move(self._cells[next[0]][next[1]])
