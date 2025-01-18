@@ -8,5 +8,6 @@ CELL_WIDTH = 50
 CELL_HEIGHT = 50
 CELL_MARGIN = 50 # border space
 
-BUILD_TIME = 0.0   # seconds
-SOLVE_TIME = 0.0   # seconds
+# Add time (seconds) to update maze to easier see whats happening
+BUILD_TIME = 0.0
+SOLVE_TIME = 0.0
