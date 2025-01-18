@@ -32,6 +32,7 @@ class Maze:
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
+        self._reset_cells_visited()
 
     def _create_cells(self):
         # Fill list with rows and rows with cells
@@ -123,5 +124,10 @@ class Maze:
                 self._cells[i][j].has_bottom_wall = False
                 self._cells[dir[0]][dir[1]].has_top_wall = False
                 
-            
+            # Recursivly call on next cell
             self._break_walls_r(dir[0], dir[1])
+
+    def _reset_cells_visited(self):
+        for list in self._cells:
+            for cell in list:
+                cell.visited = False
