@@ -8,5 +8,5 @@ CELL_WIDTH = 50
 CELL_HEIGHT = 50
 CELL_MARGIN = 50 # border space
 
-BUILD_TIME = 0.01   # seconds
-SOLVE_TIME = 0.05
+BUILD_TIME = 0.0   # seconds
+SOLVE_TIME = 0.0   # seconds

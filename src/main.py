@@ -3,6 +3,7 @@ from constants import *
 from cell import Cell
 from maze import Maze
 import sys
+import time
 
 def main():
     num_rows = NUM_ROWS
@@ -20,11 +21,15 @@ def main():
 
     maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
     print("maze created")
+
+    start_time = time.time()
     is_solvable = maze.solve()
+    end_time = time.time()
     if not is_solvable:
         print("maze can not be solved!")
     else:
-        print("maze solved!")
+        time_to_solve = end_time - start_time
+        print(f"maze solved in {time_to_solve} seconds! (solve update time added: {SOLVE_TIME} seconds)")
 
     win.wait_for_close()
 
