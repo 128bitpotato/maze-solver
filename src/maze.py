@@ -2,6 +2,7 @@ from cell import Cell
 from constants import *
 from time import sleep
 import random
+from constants import BUILD_TIME, SOLVE_TIME
 
 class Maze:
     def __init__(
@@ -33,7 +34,6 @@ class Maze:
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
         self._reset_cells_visited()
-        self.solve()
 
     def _create_cells(self):
         # Fill list with rows and rows with cells
@@ -65,7 +65,13 @@ class Maze:
         if self._win is None:
             return
         self._win.redraw()
-        sleep(0.01)
+        sleep(BUILD_TIME)
+    
+    def _animate_solve(self):
+        if self._win is None:
+            return
+        self._win.redraw()
+        sleep(SOLVE_TIME)
     
     def _break_entrance_and_exit(self):
         self._cells[0][0].has_top_wall = False
@@ -135,11 +141,10 @@ class Maze:
         solved = False
         while not solved:
             solved = self._solve_r()
-        print("SOLVED!")
         return solved
 
     def _solve_r(self, i=0, j=0):
-        self._animate()
+        self._animate_solve()
         self._cells[i][j].visited = True
 
         if self._cells[i][j] == self._cells[-1][-1]:
