@@ -12,6 +12,7 @@ class Cell:
         self._y2 = None
         self._win = win
         self.visited = False
+        self.exit = False
     
     def __repr__(self):
         return f"T_Wall: {self.has_top_wall} - B_Wall: {self.has_bottom_wall}"
