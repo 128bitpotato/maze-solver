@@ -160,7 +160,7 @@ class Maze:
         self._animate_solve()
         self._cells[i][j].visited = True
 
-        if self._cells[i][j] == self._cells[-1][-1]:
+        if self._cells[i][j].exit == True:
             return True
         
         to_visit = []
