@@ -24,8 +24,7 @@ class Maze:
         self._cell_size_y = cell_size_y
         self._win = win
         
-        self.seed = seed
-        if seed != None:
+        if seed:
             random.seed(seed)
 
         self._cells = []
@@ -34,6 +33,14 @@ class Maze:
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
         self._reset_cells_visited()
+        
+    def print_cells(self):
+        print("---PRINT CELLS---")
+        print(len(self._cells))
+        row_num_c = 1
+        for row in self._cells:
+            print(f"Row {row_num_c}: {len(row)}")
+            row_num_c += 1
 
     def _create_cells(self):
         # Fill list with rows and rows with cells
@@ -80,18 +87,22 @@ class Maze:
 
         # Exit
         # Random bottom row or right column
-        random_p = random.randrange(0, 1) # random number 0 or 1 for placement of exit
+        random_p = random.randint(0, 1) # random number 0 or 1 for placement of exit
 
         # 0 = Bottom row
         if random_p == 0:
-            exit_col = random.randrange(len(self._cells) - 1)
-            exit_row = -1
+            exit_col = random.randrange(len(self._cells))
+            exit_row = len(self._cells[exit_col]) - 1
         # 1 = Right column
-        else:
-            exit_col = -1
-            exit_row = random.randrange(len(self._cells) // 2, len(self._cells) - 1)
+        elif random_p == 1:
+            exit_col = len(self._cells) - 1
+            exit_row = random.randrange(len(self._cells[-1]) // 2, len(self._cells[-1]))
         # Apply exit
-        self._cells[exit_col][exit_row].has_bottom_wall = False
+        if random_p == 0:
+            self._cells[exit_col][exit_row].has_bottom_wall = False
+        elif random_p == 1:
+            self._cells[exit_col][exit_row].has_right_wall = False
+        self._cells[exit_col][exit_row].exit = True
         self._draw_cell(exit_col, exit_row)
 
     def _break_walls_r(self, i, j):
@@ -116,6 +127,7 @@ class Maze:
                 if not self._cells[i][j + 1].visited:
                     to_visit.append((i, j + 1))
                     
+            # print(f"PRINT to_visit: {to_visit}")
 
             if len(to_visit) == 0:
                 self._draw_cell(i, j)
@@ -161,6 +173,10 @@ class Maze:
         self._cells[i][j].visited = True
 
         if self._cells[i][j].exit == True:
+            if i == len(self._cells) - 1 and not self._cells[i][j].has_right_wall:
+                self._cells[i][j].draw_end(to_right=True)
+            else:
+                self._cells[i][j].draw_end()
             return True
         
         to_visit = []

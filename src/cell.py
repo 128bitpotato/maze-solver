@@ -58,3 +58,16 @@ class Cell:
                     Point((to_cell._x1 + to_cell._x2) // 2, (to_cell._y1 + to_cell._y2) // 2)
                     )
         self._win.draw_line(line, "grey" if undo else "red")
+
+    def draw_end(self, to_right=False):
+        if to_right:
+            to_x = self._x2
+            to_y = (self._y1 + self._y2) // 2
+        else:
+            to_x = (self._x1 + self._x2) // 2
+            to_y = self._y2
+
+        line = Line(Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2), 
+                    Point(to_x, to_y)
+                    )
+        self._win.draw_line(line, "red")

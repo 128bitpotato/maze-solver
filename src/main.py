@@ -19,7 +19,7 @@ def main():
     win = Window(screen_x, screen_y)
     sys.setrecursionlimit(10000)
 
-    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
+    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
     print("maze created")
 
     start_time = time.time()
