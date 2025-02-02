@@ -74,12 +74,25 @@ class Maze:
         sleep(SOLVE_TIME)
     
     def _break_entrance_and_exit(self):
+        # Entrance
         self._cells[0][0].has_top_wall = False
         self._draw_cell(0, 0)
-        last_cell_col = len(self._cells) - 1
-        last_cell_row = len(self._cells[-1]) - 1
-        self._cells[last_cell_col][last_cell_row].has_bottom_wall = False
-        self._draw_cell(last_cell_col, last_cell_row)
+
+        # Exit
+        # Random bottom row or right column
+        random_p = random.randrange(0, 1) # random number 0 or 1 for placement of exit
+
+        # 0 = Bottom row
+        if random_p == 0:
+            exit_col = random.randrange(len(self._cells) - 1)
+            exit_row = -1
+        # 1 = Right column
+        else:
+            exit_col = -1
+            exit_row = random.randrange(len(self._cells) // 2, len(self._cells) - 1)
+        # Apply exit
+        self._cells[exit_col][exit_row].has_bottom_wall = False
+        self._draw_cell(exit_col, exit_row)
 
     def _break_walls_r(self, i, j):
         self._cells[i][j].visited = True
